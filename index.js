@@ -9,8 +9,17 @@ let scrape = async () => {
 		const title = document.querySelector(
 			'.vendor-contract-header__content > p.lead'
 		).innerText
+		const rawMeta = document.querySelector(
+			'.vendor-contract-header__content > p:last-child'
+		)
+		const expiration = new Date(
+			rawMeta.childNodes[2].textContent.match(/\d{2}\/\d{2}\/\d{4}/)[0]
+		)
+		const contractNum = rawMeta.childNodes[0].textContent
 		const obj = {
-			title: title
+			title: title,
+			expiration: expiration.toISOString(),
+			contract_number: contractNum
 		}
 		return obj
 	})
