@@ -6,12 +6,16 @@ let scrape = async () => {
 		'https://www.sourcewell-mn.gov/cooperative-purchasing/022217-wex'
 	)
 	const sourcewell = await page.evaluate(() => {
-		return document.querySelector(
+		const title = document.querySelector(
 			'.vendor-contract-header__content > p.lead'
 		).innerText
+		const obj = {
+			title: title
+		}
+		return obj
 	})
 	await browser.close()
-	return sourcewell
+	return JSON.stringify(sourcewell)
 }
 
 scrape().then((value) => {
