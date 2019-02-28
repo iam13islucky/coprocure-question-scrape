@@ -15,7 +15,7 @@ let scrape = async () => {
 		const expiration = new Date(
 			rawMeta.childNodes[2].textContent.match(/\d{2}\/\d{2}\/\d{4}/)[0]
 		)
-		const contractNum = rawMeta.childNodes[0].textContent
+		const contractNum = rawMeta.childNodes[0].textContent.substring(1)
 		const rawFileInfo = document.querySelector(
 			'#tab-contract-documents > div.field--name-field-contract-documents > div.field--items > div.field--item:nth-child(2) > span.file > span.file-link > a'
 		)
@@ -31,7 +31,7 @@ let scrape = async () => {
 			'#tab-contact-information > article.vendor-contract > div.inline-user'
 		)
 		const contactName = rawContact.children[0].innerText
-		const contactNum = rawContact.children[1].children[1].innerText
+		const contactNum = rawContact.children[1].children[1].innerText.trim()
 		const contactEmail = rawContact.children[2].children[1].innerText
 		const obj = {
 			title: title,
@@ -56,7 +56,7 @@ let scrape = async () => {
 		return obj
 	})
 	await browser.close()
-	return JSON.stringify(sourcewell)
+	return JSON.stringify(sourcewell, null, 2)
 }
 
 scrape().then((value) => {
