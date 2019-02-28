@@ -24,6 +24,15 @@ let scrape = async () => {
 			.replace(/\s/g, '-')
 			.toLowerCase()
 		const fileUrl = rawFileInfo.href
+		const vendorName = document.querySelector(
+			'.vendor-contract-header__content > h1.h2'
+		).innerText
+		const rawContact = document.querySelector(
+			'#tab-contact-information > article.vendor-contract > div.inline-user'
+		)
+		const contactName = rawContact.children[0].innerText
+		const contactNum = rawContact.children[1].children[1].innerText
+		const contactEmail = rawContact.children[2].children[1].innerText
 		const obj = {
 			title: title,
 			expiration: expiration.toISOString(),
@@ -32,7 +41,17 @@ let scrape = async () => {
 				{
 					[fileName]: fileUrl
 				}
-			]
+			],
+			vendor: {
+				name: vendorName,
+				contacts: [
+					{
+						name: contactName,
+						phone: contactNum,
+						email: contactEmail
+					}
+				]
+			}
 		}
 		return obj
 	})
