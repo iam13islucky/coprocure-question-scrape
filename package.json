@@ -1,0 +1,11 @@
+{
+  "name": "coprocure-question-scrape",
+  "version": "1.0.0",
+  "description": "My response to CoProcure's Interview Question",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Cutler Cox",
+  "license": "MIT"
+}
